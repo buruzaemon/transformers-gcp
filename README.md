@@ -11,6 +11,8 @@ This covers:
 
 Note that we are _not_ using the User-managed Notebooks feature of Vertex AI. The reason for that is the version/configuration of JupyterLab used in Vertex AI is fixed and not easily edited. When you run any of the `transformers` API code in Vertex AI's notebooks, you will see errors for "Error: Model not found" and you will not be able to load pretrained models, etc., much less use them. Hence, we will be setting up our own JupyterLab environment.
 
+These are my notes from November 2022.
+
 ## Create a new project
 
 1. Create New Project
@@ -70,3 +72,16 @@ The next step is create a new Virtual Machine for deep learning under the Comput
         1. Allow HTTP traffic
         1. Allow HTTPS traffic
     * Click the CREATE button!
+
+## Install the NVIDIA drivers
+
+While the Notebooks in Vertex AI already have the NVIDIA drivers installed, we are opting to not use Vertex AI. Hence, we need to manually install them here.
+
+1. If you aren't already there, go to Compute Engine > VM instances.
+2. Start up your newly-created virtual machine
+3. After your virtual machine instance is up and running, click on the SSH button to open up a browser-based shell for SSH.
+4. In this shell window, first try running:
+    * `ps aux | grep -i apt`
+    * Make sure that nothing (like root user)
+5. 
+6. 
