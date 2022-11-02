@@ -44,3 +44,29 @@ Note that we are _not_ using the User-managed Notebooks feature of Vertex AI. Th
 At this point, you will have a brand-new project on GCP. 
 
 The next step is create a new Virtual Machine for deep learning under the Compute Engine service we just enabled.
+
+## Create a new Virtual Machine instance
+
+1. In the left-hand navigation of GCP, go to Compute Engine > VM Instance
+    * Click the Create Instance button
+    * Enter appropriate values for:
+        1. Name
+        1. Labels(?)
+        1. Region ... select a region + zone that
+           * that allows for the machine type below
+           * is energy-efficient
+           * matches your budget expectations
+    * Machine configuration: GPU
+        1. GPU type: NVIDIA Tesla T4
+        1. Number of GPUs: 1
+    * Machine type: n1-standard-8 (8 vCPU, 30 GB memory); 30 GB for whisper!
+    * Boot disk
+        1. In order to have the NVIDAI CUDA stack installed for us, click CHANGE to switch boot disk to 
+           * Operating System: Deep Learning on Linux
+           * Version: Debian 10 based Deep Learning VM (with Intel MK) M99; Base CUDA 11.3, Deep Learning VM with CUDA 11.3 preinstalled
+           * Boot disk type: Balanced persistent disk
+           * Size (GB): 100 (matches the specs you would see for a User-managed Notebook on Vertex AI)
+    * Firewall:
+        1. Allow HTTP traffic
+        1. Allow HTTPS traffic
+    * Click the CREATE button!
