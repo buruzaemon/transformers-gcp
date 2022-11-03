@@ -155,11 +155,16 @@ c.f. [Monitoring GPU Performance on Linux VMs](https://cloud.google.com/compute/
 ### Create a dashboard for GPU monitoring
 
 1. In the left-hand navigation, go to Monitoring > Metrics explorer
-2. Click on SELECT A METRIC, and choose VM Instance > Custom > `custom/instance/gpu/utlization`
+2. Click on SELECT A METRIC, and choose VM Instance > Custom > `custom/instance/gpu/utilization`
 3. Confirm that you can actually see the GPU utilization chart
 4. Now go to Dashboards
 5. Click Create Dashboard
 6. Enter an appropriate and easily recognizable name for this dashboard which we will use to specifically monitor all available GPU metrics
 7. Now return to Metrics explorer
-8. Using step 2 above, select all of the available GPU metrics one-by-one, and use the Save Chart button to save this metric to our newly-created dashboard.
-9. Now view our dashboard for GPU monitoring.
+8. Using step 2 above, select all of the available GPU metrics one-by-one, and use the Save Chart button to save this metric to our newly-created dashboard. Set up metrics in our dashboard for:
+    * `custom/instance/gpu/utilization`
+    * `custom/instance/gpu/memory_utilization`
+    * `custom/instance/gpu/memory_total`
+    * `custom/instance/gpu/memory_free`
+    * `custom/instance/gpu/temperature`
+10. Now view our dashboard for GPU monitoring.
