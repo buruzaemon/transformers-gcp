@@ -121,7 +121,45 @@ Since we are not using the Vertex AI notebooks, we also need to reserve a static
     * Source filter ... keep default of IPv4 ranges
     * Source IPv4 ranges ... enter 0.0.0.0/0
     * Protocols and ports ... choose Specified protocols and ports
-    * Select TPC, and enter your favorite port for Jupyter (the default is port 8888)
+    * Select TCP, and enter your favorite port for Jupyter (the default is port 8888)
     * Click the Create button
 
+## Set up GPU performance monitoring
 
+### Download & install GPU Utilization Metric Agent
+
+c.f. [Monitoring GPU Performance on Linux VMs](https://cloud.google.com/compute/docs/gpus/monitor-gpus)
+
+1. Start up an SSH shell to your running virtual machine instance.
+2. Create a working directory for the utility code we will be fetching with `git`; change to that working directory.
+    * `sudo mkdir -p /opt/google`
+    * `cd /opt/google`
+3. Download the script for setting up GPU performance monitoring from GitHub.
+    * `sudo git clone https://github.com/GoogleCloudPlatform/compute-gpu-monitoring.git`
+4. Move to the compute-gpu-monitoring/linux subdirectory.
+    * `cd /opt/google/compute-gpu-monitoring/linux`
+5. Prepare to create a `venv` virtual environment
+    * `sudo apt-get install python3-venv`
+6. Create the virtual environment; install the packages.
+    * `sudo python3 -m venv venv`
+    * `sudo venv/bin/pip install wheel`
+    * `sudo venv/bin/pip install -Ur requirements.txt`
+7. Start the agent on system boot.
+    * `sudo cp /opt/google/compute-gpu-monitoring/linux/systemd/google_gpu_monitoring_agent_venv.service /lib/systemd/system`
+    * `sudo systemctl daemon-reload`
+    * `sudo systemctl --no-reload --now enable /lib/systemd/system/google_gpu_monitoring_agent_venv.service`
+8. Verify that the new GPU monitoring service has been installed correctly, and is presently running.
+    * `sudo systemctl list-units | grep gpu`
+    * You should see that `google_gpu_monitoring_agent_venv.service` for GPU Utilization Metric Agent is `loaded active running`
+
+### Create a dashboard for GPU monitoring
+
+1. In the left-hand navigation, go to Monitoring > Metrics explorer
+2. Click on SELECT A METRIC, and choose VM Instance > Custom > `custom/instance/gpu/utlization`
+3. Confirm that you can actually see the GPU utilization chart
+4. Now go to Dashboards
+5. Click Create Dashboard
+6. Enter an appropriate and easily recognizable name for this dashboard which we will use to specifically monitor all available GPU metrics
+7. Now return to Metrics explorer
+8. Using step 2 above, select all of the available GPU metrics one-by-one, and use the Save Chart button to save this metric to our newly-created dashboard.
+9. Now view our dashboard for GPU monitoring.
