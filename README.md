@@ -84,5 +84,5 @@ While the Notebooks in Vertex AI already have the NVIDIA drivers installed, we a
     * `ps aux | grep -i apt`
     * Make sure that nothing (like root user) is running `apt` for updates, etc. 
     * If you try doing the NVIDIA driver install while root user is doing `apt update` or the like, then you will see errors for not being able to acquire a lock on `apt` and you will not be able to install the NVIDIA driver successfully (c.f. [this](https://itsfoss.com/could-not-get-lock-error/))
-5. 
-6. 
+5. When you are sure that there are no other users/processes using `apt`, in the SSH shell you will see a message that instructs you on how to install the NVIDIA driver. Follow those instructions.
+    * Should those instructions in the SSH shell fail, you can always try the instruction to [Install GPU drivers](https://cloud.google.com/compute/docs/gpus/install-drivers-gpu).
