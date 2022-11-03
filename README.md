@@ -86,3 +86,42 @@ While the Notebooks in Vertex AI already have the NVIDIA drivers installed, we a
     * If you try doing the NVIDIA driver install while root user is doing `apt update` or the like, then you will see errors for not being able to acquire a lock on `apt` and you will not be able to install the NVIDIA driver successfully (c.f. [this](https://itsfoss.com/could-not-get-lock-error/))
 5. When you are sure that there are no other users/processes using `apt`, in the SSH shell you will see a message that instructs you on how to install the NVIDIA driver. Follow those instructions.
     * Should those instructions in the SSH shell fail, you can always try the instruction to [Install GPU drivers](https://cloud.google.com/compute/docs/gpus/install-drivers-gpu).
+
+## Reserve a static IP address and create Firewall rule
+
+Since we are not using the Vertex AI notebooks, we also need to reserve a static IP address and create a Firewall rule to open up TCP traffic on some port for JupyterLab.
+
+### Reserve a static IP address for your virtual machine
+1. In the left-hand navigation in GCP cloud console, go to VPC Network > IP addresses
+2. Click on Reserve External Static Address
+    * Static IP addresses are reserved per virtual machine instance
+3. Enter:
+    * Name
+    * Description
+    * Select Standard for Network Service Tier
+    * Select Regional for Type, and select the region of your virtual machine for Region.
+    * Select your virtual machine instance for Attached to
+    * Click Reserve
+
+*NOTE* if you delete a virtual machine instance with a reserved static IP address, be sure to Release that static IP address afterwards. Otherwise, you will continue to be charged for that static IP adddress even though it is not in use! 
+
+### Create a Firewall rule for JupyterLab traffic in your project
+1. While still in VPC Network, go to Firewall.
+2. Click on Create Firewall Rule
+3. Enter:
+    * Name
+    * Description
+    * Network ... keep default
+    * Priority ... keep default value of 1000
+    * Direction of traffic ... keep default of Ingress
+    * Action on match ... keep default of Allow
+    * Targets ... select Specified service account
+    * Service account scope ... keep default of In this project
+    * Target service account ... select your service account
+    * Source filter ... keep default of IPv4 ranges
+    * Source IPv4 ranges ... enter 0.0.0.0/0
+    * Protocols and ports ... choose Specified protocols and ports
+    * Select TPC, and enter your favorite port for Jupyter (the default is port 8888)
+    * Click the Create button
+
+
