@@ -63,7 +63,7 @@ The next step is create a new Virtual Machine for deep learning under the Comput
         1. Number of GPUs: 1
     * Machine type: n1-standard-8 (8 vCPU, 30 GB memory); 30 GB for whisper!
     * Boot disk
-        1. In order to have the NVIDAI CUDA stack installed for us, click CHANGE to switch boot disk to 
+        1. In order to have the NVIDAI CUDA drivers installed for us, click CHANGE to switch boot disk to 
            * Operating System: Deep Learning on Linux
            * Version: Debian 10 based Deep Learning VM (with Intel MK) M99; Base CUDA 11.3, Deep Learning VM with CUDA 11.3 preinstalled
            * Boot disk type: Balanced persistent disk
@@ -82,6 +82,7 @@ While the Notebooks in Vertex AI already have the NVIDIA drivers installed, we a
 3. After your virtual machine instance is up and running, click on the SSH button to open up a browser-based shell for SSH.
 4. In this shell window, first try running:
     * `ps aux | grep -i apt`
-    * Make sure that nothing (like root user)
+    * Make sure that nothing (like root user) is running `apt` for updates, etc. 
+    * If you try doing the NVIDIA driver install while root user is doing `apt update` or the like, then you will see errors for not being able to acquire a lock on `apt` and you will not be able to install the NVIDIA driver successfully (c.f. [this](https://itsfoss.com/could-not-get-lock-error/))
 5. 
 6. 
