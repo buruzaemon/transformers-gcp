@@ -43,6 +43,7 @@ These are my notes from November 2022.
         2. Click the Submit request button
     * It may take several minutes and even up to two business days before you see that GPUS-ALL-REGIONS-per-project quota value go from 0 to 1. Be patient.
     * NOTE that you may have to first upgrade to a paid account to be able to change your quota settings. You can do that by navigating to your Billing Overview, and looking for that button to Upgrade.
+    * IF you decide to use another GPU like, say, the NVIDIA A100, then you will also have to request a quota increase from 0 to 1 for the NVIDIA A100 GPUS quota for your target region as well.
 
 At this point, you will have a brand-new project on GCP. 
 
@@ -87,6 +88,7 @@ While the Notebooks in Vertex AI already have the NVIDIA drivers installed, we a
     * If you try doing the NVIDIA driver install while root user is doing `apt update` or the like, then you will see errors for not being able to acquire a lock on `apt` and you will not be able to install the NVIDIA driver successfully (c.f. [this](https://itsfoss.com/could-not-get-lock-error/))
 5. When you are sure that there are no other users/processes using `apt`, in the SSH shell you will see a message that instructs you on how to install the NVIDIA driver. Follow those instructions.
     * Should those instructions in the SSH shell fail, you can always try the instruction to [Install GPU drivers](https://cloud.google.com/compute/docs/gpus/install-drivers-gpu).
+    * It may help to actually uninstall any existing run installations with `sudo /usr/bin/nvidia-uninstall`
 
 ## Reserve a static IP address and create Firewall rule
 
