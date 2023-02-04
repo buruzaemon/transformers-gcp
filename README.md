@@ -42,6 +42,7 @@ These are my notes from November 2022.
         1. Confirm your Name, Email, and Phone number values.
         2. Click the Submit request button
     * It may take several minutes and even up to two business days before you see that GPUS-ALL-REGIONS-per-project quota value go from 0 to 1. Be patient.
+    * NOTE that you may have to first upgrade to a paid account to be able to change your quota settings. You can do that by navigating to your Billing Overview, and looking for that button to Upgrade.
 
 At this point, you will have a brand-new project on GCP. 
 
