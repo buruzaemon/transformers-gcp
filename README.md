@@ -173,6 +173,23 @@ c.f. [Monitoring GPU Performance on Linux VMs](https://cloud.google.com/compute/
 10. Now view our dashboard for GPU monitoring.
 
 
+### Create a Python virtual environment and install the necessary packages
+
+1. Create a new `conda` environment
+    * `conda create -n transformers-py38 python=3.8 setuptools wheel ipywidgets ipykernel jupyterlab jupyterlab_widgets matplotlib numpy scipy scikit-learn pandas ipympl jinja2=3.0.3 nbconvert=6.4.4`
+2. Activate your newly created virtual environment
+    * `conda activate transformers-py38`
+3. Use `conda` and install further libraries for deep learning
+    * `conda install pytorch=1.11.0 torchvision=0.12.0 torchaudio=0.11.0 -c pytorch`
+4. Use `pip` and install more working with transformers
+    * `pip install pyannote.audio transformers datasets evaluate accelerate bertviz umap-learn`
+5. Use `pip` to install Whisper
+    * `pip install git+https://github.com/openai/whisper.git`
+    * Don't forget to manually create that softlink for `libopenh264.so.5`!
+6. Use `pip` to enable `huggingface-cli` to use the `delete-cache` command
+    * `pip install huggingface_hub[cli]`
+
+
 ### Configure Jupyter Notebook
 
 1. Create a configuration file for Jupyter notebook:
