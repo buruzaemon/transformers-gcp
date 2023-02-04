@@ -169,3 +169,16 @@ c.f. [Monitoring GPU Performance on Linux VMs](https://cloud.google.com/compute/
     * `custom/instance/gpu/memory_free`
     * `custom/instance/gpu/temperature`
 10. Now view our dashboard for GPU monitoring.
+
+
+### Configure Jupyter Notebook
+
+1. Create a configuration file for Jupyter notebook:
+    * `jupyter notebook --generate-config`
+2. Add the following configurations right under the line with `c = get_config()` (about line 3 or so)...
+    * `c.ServerApp.ip = "*"`
+    * `c.ServerApp.port = 8888`
+    * `c.ServerApp.open_browser = False`
+3. In order to deal with those `Could not determine jupyterlab build status without nodejs` messages when starting up Jupyter Lab, do this:
+    * `conda install -c conda-forge nodejs`
+    
