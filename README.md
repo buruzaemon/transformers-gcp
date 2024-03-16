@@ -192,8 +192,8 @@ c.f. [Monitoring GPU Performance on Linux VMs](https://cloud.google.com/compute/
 
 ### Configure Jupyter Notebook
 
-1. Create a configuration file for Jupyter notebook:
-    * `jupyter notebook --generate-config`
+1. Create a configuration file for Jupyter lab:
+    * `jupyter lab --generate-config`
 2. Add the following configurations right under the line with `c = get_config()` (about line 3 or so)...
     * `c.ServerApp.ip = "*"`
     * `c.ServerApp.port = 8888`
